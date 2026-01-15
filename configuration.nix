@@ -313,7 +313,7 @@
 
   # Auto Updates
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.dates = "weekly";
+  system.autoUpgrade.allowReboot = true;
 
   # Garbage Collection
   nix.gc.automatic = true;
