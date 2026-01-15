@@ -129,7 +129,7 @@
 
   services.locate = {
     enable = true;
-    packages = pkgs.mlocate;
+    package = pkgs.mlocate;
   };
 
   xdg.portal.enable = true;
