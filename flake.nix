@@ -1,8 +1,10 @@
 {
-  description = "A very basic flake";
+  description = "Flake for NixOS Config ";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
+
   outputs = {
     self,
     nixpkgs,

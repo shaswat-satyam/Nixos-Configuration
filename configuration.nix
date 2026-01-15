@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -17,6 +18,15 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Use a Boot Theme
+  boot.loader.grub.theme =
+    pkgs.fetchFromGitHub {
+      owner = "shvchk";
+      repo = "fallout-grub-theme";
+      rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
+      sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
+    };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless = {
@@ -60,14 +70,14 @@
   services.xserver.enable = true;
 
   # Enabling Flatpak delete after Stremio stabilizes
-  services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  # services.flatpak.enable = true;
+  # systemd.services.flatpak-repo = {
+  #   wantedBy = ["multi-user.target"];
+  #   path = [pkgs.flatpak];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
 
   # Enable 32bit Support for Epic games
   hardware.graphics.enable32Bit = true;
@@ -251,7 +261,8 @@
     anki
     fontpreview
     libreoffice
-    stremio
+
+    # stremio
 
     ## CLI
     wget
@@ -303,9 +314,9 @@
   };
 
   # Until Stremio Gets Secure
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "qtwebengine-5.15.19"
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
