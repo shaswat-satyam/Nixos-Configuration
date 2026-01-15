@@ -178,7 +178,6 @@
     libreoffice
     vscodium
     hyprshot
-    lutris
     alejandra
     wl-clipboard
     anki
