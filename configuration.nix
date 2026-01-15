@@ -164,6 +164,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
     # Desktop Environment
     walker
     pavucontrol
@@ -205,8 +206,6 @@
     swww
     mpvpaper
 
-    # Neovim
-    # neovim
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 
     # Secret Manager
@@ -219,7 +218,6 @@
     blueman
 
     # Application Software
-
 
     ## Programming Lanaguage
     git
@@ -253,6 +251,7 @@
     anki
     fontpreview
     libreoffice
+    stremio
 
     ## CLI
     wget
@@ -304,9 +303,9 @@
   };
 
   # Until Stremio Gets Secure
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "qtwebengine-5.15.19"
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
