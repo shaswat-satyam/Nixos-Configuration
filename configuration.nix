@@ -31,6 +31,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  # Flakes
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -178,6 +181,7 @@
     libreoffice
     vscodium
     hyprshot
+    stremio
     alejandra
     wl-clipboard
     anki
@@ -223,6 +227,16 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # Auto Updates
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
+
+  # Garbage Collection
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 10d";
+  nix.settings.auto-optimise-store = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
