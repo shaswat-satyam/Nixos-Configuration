@@ -115,6 +115,11 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+
+  programs.gamemode.enable = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -165,6 +170,7 @@
     tldr
     trash-cli
     unzip
+    unrar
     virt-viewer
     waybar
     wget
@@ -187,6 +193,8 @@
     wine64
     vscodium
     hyprshot
+    xwayland
+    steam
     thunderbird
     qbittorrent
     tor
@@ -209,6 +217,7 @@
     lua
     ags
     git
+    mangohud
   ];
 
   fonts.fontDir.enable = true;
