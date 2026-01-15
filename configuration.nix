@@ -148,6 +148,10 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibilitytools.d";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -207,14 +211,22 @@
     vscodium
     hyprshot
     xwayland
+
     mangohud
     steam
+    protonup
+
     thunderbird
     qbittorrent
     tor
     librewolf
     brave
+
+    obsidian
+
     lutris
+    heroic
+
     alejandra
     wl-clipboard
     anki
