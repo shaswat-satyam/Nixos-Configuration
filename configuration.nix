@@ -60,6 +60,16 @@
   services.xserver.enable = true;
 
   services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.flatpak];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
+  # Enable 32bit Support for Epic games
+  hardware.graphics.enable32Bit = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -197,6 +207,7 @@
     vscodium
     hyprshot
     xwayland
+    mangohud
     steam
     thunderbird
     qbittorrent
