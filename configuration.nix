@@ -181,6 +181,7 @@
     libreoffice
     vscodium
     hyprshot
+    qbittorrent
     thunderbird
     tor
     librewolf
