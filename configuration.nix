@@ -12,21 +12,26 @@
     ./hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
+
+  # Bootloader.
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      useOSProber = true;
+      device = "nodev";
+      efiSupport = true;
+      theme = pkgs.sleek-grub-theme;
+    };
+
+  };
+  
+  
+
+ # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Use a Boot Theme
-  boot.loader.grub.theme =
-    pkgs.fetchFromGitHub {
-      owner = "shvchk";
-      repo = "fallout-grub-theme";
-      rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
-      sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
-    };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless = {
@@ -264,6 +269,11 @@
 
     # stremio
 
+    # Games
+    openrct2
+    openloco
+    steam-run
+
     ## CLI
     wget
     alejandra
@@ -275,12 +285,28 @@
     unrar
     virt-viewer
 
+    ## TUI Games
+    nethack
+
+
     ## TUI
 
     fzf
     yazi
     lsd
     lazygit
+    discordo
+    btop
+    bluetui
+    impala
+    wiremix
+    lynx 
+    ncdu
+    posting
+    caligula
+    gophertube
+    qutebrowser
+
 
     # System Software
     libvirt
@@ -330,6 +356,7 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
 
   # Auto Updates
   system.autoUpgrade.enable = true;
