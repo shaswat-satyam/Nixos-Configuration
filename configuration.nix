@@ -128,12 +128,12 @@
   programs.firefox.enable = true;
 
   # Manage Neovim
-  programs.neovim = {
-    defaultEditor = true;
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
+  # programs.neovim = {
+  #   defaultEditor = true;
+  #   enable = true;
+  #   viAlias = true;
+  #   vimAlias = true;
+  # };
   
 
   programs.steam.enable = true;
@@ -181,7 +181,7 @@
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
     xwayland
-    firefox-wayland
+    firefox
     wl-color-picker
     wofi
 
@@ -206,7 +206,7 @@
     mpvpaper
 
     # Neovim
-    neovim
+    # neovim
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 
     # Secret Manager
@@ -282,7 +282,7 @@
     lutris
     mangohud
     steam
-    protonup
+    protonup-ng
     wine64
 
   ];
