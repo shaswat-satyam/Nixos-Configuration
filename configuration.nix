@@ -59,6 +59,7 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  # Enabling Flatpak delete after Stremio stabilizes
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
     wantedBy = ["multi-user.target"];
@@ -120,7 +121,6 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       kdePackages.kate
-      #  thunderbird
     ];
   };
 
@@ -155,94 +155,126 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    gnome-keyring
-    blueman
-    mako
-    libnotify
-    eww
+    # Desktop Environment
     walker
-    yazi
-    waypaper
-    hyprpaper
-    hyprpicker
-    libsecret
-    libvirt
-    lsd
-    meson
-    mpv
-    networkmanagerapplet
     pavucontrol
-    swww
-    mpvpaper
-    neovim
-    podman
-    gh
-    nodejs
-    vscodium
-    pnpm
     pipewire
-    polkit_gnome
+    playerctl
     rofi
     scrot
-    tldr
-    trash-cli
-    unzip
-    unrar
-    virt-viewer
+
+    ## Wayland 
     waybar
     wget
-    wl-color-picker
-    lazygit
-    fd
-    wofi
+    wl-clipboard
     wlroots
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
     xwayland
-    ydotool
+    firefox-wayland
+    wl-color-picker
+    wofi
+
+    ## Notification
+    ags
+    swaynotificationcenter
+    mako
+    libnotify
+    eww
+    wofi
+    brightnessctl
+
+    ## Hyprland
     hyprland
+    hyprshot
+    waypaper
+    hyprpaper
+    hyprpicker
+
+    ## Wallpaper
+    swww
+    mpvpaper
+
+    # Neovim
+    neovim
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+
+    # Secret Manager
+    gnome-keyring
+    libsecret
+    polkit_gnome
+
+    ## Network Manager
+    networkmanagerapplet
+    blueman
+
+    # Application Software
+
+
+    ## Programming Lanaguage
+    git
+    podman
+    gh
+    vscodium
+
+    #### Lua
+    lua
+
+
+    #### JavaScript
+    nodejs
+    pnpm
+
+    #### C
+    gcc
+
+    #### Python
+    meson
+
+    ## GUI
     kitty
     ghostty
-    wofi
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    libreoffice
-    wine64
-    vscodium
-    hyprshot
-    xwayland
-
-    mangohud
-    steam
-    protonup
-
     thunderbird
     qbittorrent
     tor
     librewolf
     brave
-
     obsidian
-
-    lutris
-    heroic
-
-    alejandra
-    wl-clipboard
     anki
-    gcc
-    swaynotificationcenter
-    cava
-    brightnessctl
-    brillo
-    firefox-wayland
     fontpreview
+    libreoffice
+
+    ## CLI
+    wget
+    alejandra
+    brillo
+    tldr
+    trash-cli
+    fd
+    unzip
+    unrar
+    virt-viewer
+
+    ## TUI
+
     fzf
-    playerctl
-    lua
-    ags
-    git
+    yazi
+    lsd
+    lazygit
+
+    # System Software
+    libvirt
+    mpv
+
+
+    # Gaming
+    heroic
+    lutris
     mangohud
+    steam
+    protonup
+    wine64
+
   ];
 
   fonts.fontDir.enable = true;
