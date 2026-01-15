@@ -201,7 +201,6 @@
     librewolf
     brave
     lutris
-    stremio
     alejandra
     wl-clipboard
     anki
