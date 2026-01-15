@@ -181,6 +181,7 @@
     libreoffice
     vscodium
     hyprshot
+    lutris
     stremio
     alejandra
     wl-clipboard
