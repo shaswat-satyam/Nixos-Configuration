@@ -59,6 +59,8 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
+  services.flatpak.enable = true;
+
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -124,6 +126,7 @@
     enable = true;
     xwayland.enable = true;
   };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -138,7 +141,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  stremio
     gnome-keyring
     blueman
     mako
