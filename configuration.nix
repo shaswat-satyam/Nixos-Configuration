@@ -129,7 +129,7 @@
 
   services.locate = {
     enable = true;
-    locate = pkgs.mlocate;
+    packages = pkgs.mlocate;
   };
 
   xdg.portal.enable = true;
@@ -165,7 +165,7 @@
     pnpm
     pipewire
     polkit_gnome
-    rofi-wayland
+    rofi
     scrot
     tldr
     trash-cli
@@ -221,7 +221,7 @@
   ];
 
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     font-awesome
     nerd-fonts.fira-code
     google-fonts
