@@ -153,6 +153,9 @@
     swww
     mpvpaper
     neovim
+    nodejs
+    vscodium
+    pnpm
     pipewire
     polkit_gnome
     rofi-wayland
