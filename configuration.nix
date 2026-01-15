@@ -127,6 +127,15 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # Manage Neovim
+  programs.neovim = {
+    defaultEditor = true;
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+  
+
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
@@ -162,6 +171,7 @@
     playerctl
     rofi
     scrot
+    home-manager
 
     ## Wayland 
     waybar
