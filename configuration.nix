@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -9,6 +10,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # Include the Home Manager Module.
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   # Bootloader.
@@ -34,6 +37,14 @@
   # Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Enable Home Manager
+  home-manager = {
+    extraSpecialArgs = {
+      users = {
+        shaswat = import ./home.nix;
+      };
+    };
+  };
   # Enable networking
   networking.networkmanager.enable = true;
 
