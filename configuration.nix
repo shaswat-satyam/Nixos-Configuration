@@ -181,6 +181,8 @@
     libreoffice
     vscodium
     hyprshot
+    tor
+    brave
     lutris
     stremio
     alejandra
