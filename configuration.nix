@@ -303,9 +303,9 @@
   };
 
   # Until Stremio Gets Secure
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "qtwebengine-5.15.19"
-  # ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
