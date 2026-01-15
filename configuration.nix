@@ -181,7 +181,9 @@
     libreoffice
     vscodium
     hyprshot
+    thunderbird
     tor
+    librewolf
     brave
     lutris
     stremio
