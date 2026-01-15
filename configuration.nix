@@ -153,6 +153,7 @@
     swww
     mpvpaper
     neovim
+    podman
     gh
     nodejs
     vscodium
