@@ -263,6 +263,7 @@
     librewolf
     brave
     obsidian
+    jrnl
     anki
     fontpreview
     libreoffice
