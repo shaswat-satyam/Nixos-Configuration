@@ -22,10 +22,58 @@
       useOSProber = true;
       device = "nodev";
       efiSupport = true;
-      theme = pkgs.sleek-grub-theme;
     };
 
   };
+
+  # Stylix
+  stylix = {
+        autoEnable = true;
+	  enable = true;
+	  base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+	  cursor={
+	    package = pkgs.bibata-cursors;
+	    name = "Bibata-Modern-Ice";
+	    size = 8;
+	  };
+	  fonts = {
+	    monospace = {
+	      package = pkgs.nerd-fonts.jetbrains-mono;
+	      name = "JetBrainsMono Nerd Font Mono";
+	    };
+
+	    sansSerif = {
+	      package = pkgs.dejavu_fonts;
+	      name = "DejaVu Sans";
+	    };
+
+	    serif = {
+	      package = pkgs.dejavu_fonts;
+	      name = "DejaVu Serif";
+	    };
+	    emoji = {
+	      package = pkgs.noto-fonts-color-emoji;
+	      name = "Noto Color Emoji";
+	    };
+	  };
+
+	  fonts.sizes = {
+	    applications = 12;
+	    terminal = 12;
+	    desktop = 12;
+	    popups = 12;
+	  };
+
+	  opacity = {
+	    applications = 1.0;
+	    terminal = 1.0;
+	    desktop = 1.0;
+	    popups = 1.0;
+	  };
+
+	  polarity = "either";
+  };
+
   
   
 
@@ -324,12 +372,6 @@
 
   ];
 
-  fonts.fontDir.enable = true;
-  fonts.packages = with pkgs; [
-    font-awesome
-    nerd-fonts.fira-code
-    google-fonts
-  ];
 
   environment.sessionVariables = {
     # Hint electron apps to use wayland
@@ -365,7 +407,7 @@
 
   # Garbage Collection
   nix.gc.automatic = true;
-  nix.gc.dates = "daily";
+  nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 10d";
   nix.settings.auto-optimise-store = true;
 

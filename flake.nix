@@ -3,14 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    stylix.url = "github:nix-community/stylix";
   };
 
   outputs = {
     self,
     nixpkgs,
-  }: {
+    ...
+  }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      modules = [./configuration.nix];
+      specialArgs = {inherit inputs;};
+      modules = [
+      ./configuration.nix
+      inputs.stylix.nixosModules.stylix
+      ];
     };
   };
 }
