@@ -311,12 +311,13 @@
     librewolf
     brave
     obsidian
-    jrnl
     anki
     fontpreview
     libreoffice
 
     # stremio
+    josm
+
 
     # Games
     openrct2
@@ -329,6 +330,8 @@
     brillo
     tldr
     trash-cli
+    jrnl
+    hledger
     fd
     unzip
     unrar
