@@ -148,9 +148,22 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [pkgs.epson-escpr];
+    drivers = [
+      pkgs.hplipWithPlugin
+    ];
     browsing = true;
     defaultShared = true;
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  hardware.sane= {
+    enable = true;
+    extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
   services.blueman.enable = true;
@@ -181,7 +194,7 @@
   users.users.shaswat = {
     isNormalUser = true;
     description = "Shaswat";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
       kdePackages.kate
     ];
@@ -198,6 +211,7 @@
   #   vimAlias = true;
   # };
   
+
 
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
@@ -318,6 +332,8 @@
     # stremio
     josm
 
+    hplipWithPlugin
+
 
     # Games
     openrct2
@@ -330,7 +346,6 @@
     brillo
     tldr
     trash-cli
-    jrnl
     hledger
     fd
     unzip
