@@ -17,13 +17,14 @@
   # Bootloader.
   boot.loader = {
     efi.canTouchEfiVariables = true;
-    grub = {
+    limine = {
       enable = true;
-      useOSProber = true;
-      device = "nodev";
-      efiSupport = true;
+      extraEntries =''
+  	/Windows
+	 protocol: efi
+	 path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
     };
-
   };
 
   # Stylix
@@ -331,6 +332,8 @@
 
     # stremio
     josm
+    openfx
+
 
     hplipWithPlugin
 
