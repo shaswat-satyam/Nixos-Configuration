@@ -113,8 +113,7 @@
     LC_MEASUREMENT = "en_IN";
     LC_MONETARY = "en_IN";
     LC_NAME = "en_IN";
-    LC_NUMERIC = "en_IN";
-    LC_PAPER = "en_IN";
+    LC_NUMERIC = "en_IN"; LC_PAPER = "en_IN";
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
@@ -122,7 +121,181 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+  services.syncthing = {
+    enable = true;
+    user = "shaswat";
+  };
 
+  # Home Server Services 
+#   services = {
+#     homepage-dashboard = {
+#       enable = true;
+#       openFirewall = true;
+#       allowedHosts = "192.168.29.41:8082,localhost:8082,127.0.0.1:8082";
+#       widgets = [
+# 	  {
+# 	    resources = {
+# 	      cpu = true;
+# 	      disk = "/";
+# 	      memory = true;
+# 	    };
+# 	  }
+# 	  {
+# 	    search = {
+# 	      provider = "duckduckgo";
+# 	      target = "_blank";
+# 	    };
+# 	  }
+#      ];
+#     services = [
+#       {
+#         "Services Groups" = [ 
+# 	  {
+#             "IP Address" = {
+# 	      description = "http://192.169.29.41";
+# 	      href="http://192.168.29.41";
+#             };
+# 	  }
+# 	  {
+#             "Home Page" = {
+# 	      description = "This Homepage";
+# 	      href="http://192.168.29.41:8082";
+#             };
+# 	  }
+# 	  {
+#             "Jellyfin" = {
+# 	      description = "My Media Library";
+# 	      href="http://192.168.29.41:8096";
+#             };
+# 	  }
+# 	  {
+#             "Navidrome" = {
+# 	      description = "My Music Library";
+# 	      href="http://192.168.29.41:4533";
+#             };
+# 	  }
+# 	  {
+#             "Stirling PDF" = {
+# 	      description = "My PDF Convertor";
+# 	      href="http://192.168.29.41:8085";
+# 	    };
+# 	  }
+# 	  {
+#             "Paperless" = {
+# 	      description = "My Document Library";
+# 	      href="http://192.168.29.41:28981";
+# 	    };
+# 	  }
+# 	  {
+# 	    "Microbin" = {
+# 	      description = "The Paste Bin";
+# 	      href="http://192.168.29.41:8080";
+#             };
+# 	  }
+# 	  {
+#             "Vaultwarden" = {
+# 	      description = "The Password Library";
+# 	      href="http://192.168.29.41:8096";
+#             };
+# 	  }
+# 	  {
+#             "Printing" = {
+# 	      description = "The Printer Library";
+# 	      href="http://192.168.29.41:139";
+#             };
+# 	  }
+# 	  {
+#             "Immich ML" = {
+# 	      description = "The Image Mahine Learning";
+# 	      href="http://192.168.29.41:3003";
+#             };
+# 	  }
+#         ];
+#       }
+#     ];
+#   };
+# 
+#     calibre-server = {
+#       enable = true;
+#     };
+# 
+#     jellyfin = {
+#       enable = true;
+#     };
+#     stirling-pdf = {
+#       enable = true;
+#       environment = {
+#       SERVER_PORT = "8085";
+#       };
+#     };
+#     vaultwarden = {
+#       enable = true;
+#       config = {
+#         ROCKET_ADDRESS = "0.0.0.0";
+# 	ALLOW_INSECURE_HTTP = true;
+#       };
+#     };
+#     immich = {
+#       enable = true;
+#     };
+# 
+#     navidrome = {
+#       enable = true;
+#       settings = { 
+#         Address = "0.0.0.0";
+# 	MusicFolder = "/mnt/mydrive/Music";
+#       };
+#     };
+# 
+# samba = {
+#   enable = true;
+#   openFirewall = true;
+# 
+#   settings = {
+#     global = {
+#       workgroup = "WORKGROUP";
+#       "server string" = "smbnix";
+#       "netbios name" = "smbnix";
+#       security = "user";
+#       "server min protocol" = "SMB2";
+#       "server max protocol" = "SMB3";
+#     };
+# 
+#     "Laptop" = {
+#       path = "/home/shaswat/Storage";
+#       browseable = true;
+#       readOnly = false;
+#       writeable = true;
+#       guestOk = true;
+#       validUsers = [ "shaswat" ];
+#     };
+#   };};
+# 
+#     samba-wsdd = {
+#       enable = true;
+#       discovery = true;
+#     };
+# 
+#     paperless = {
+#       enable = true;
+#       address = "0.0.0.0";
+#     };
+#     microbin = {
+#       enable = true;
+#     };
+#     # miniflux = {
+#     #   enable = true;
+#     #   adminCredentialsFile = true;
+#     # };
+#   };
+#   environment.etc."nextcloud-admin-pass".text = "Lucifer_69";
+#   services.nextcloud = {
+#     enable = true;
+#     package = pkgs.nextcloud32;
+#     hostName = "localhost";
+#     config.adminpassFile = "/etc/nextcloud-admin-pass";
+#     config.dbtype = "sqlite";
+#   };
   # Enabling Flatpak delete after Stremio stabilizes
   # services.flatpak.enable = true;
   # systemd.services.flatpak-repo = {
@@ -160,6 +333,33 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
+    publish.enable = true;
+    publish.userServices = true;
+      extraServiceFiles = {
+        timemachine = ''
+          <?xml version="1.0" standalone='no'?>
+          <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+          <service-group>
+            <name replace-wildcards="yes">%h</name>
+            <service>
+              <type>_smb._tcp</type>
+              <port>445</port>
+            </service>
+              <service>
+              <type>_device-info._tcp</type>
+              <port>0</port>
+              <txt-record>model=TimeCapsule8,119</txt-record>
+            </service>
+            <service>
+              <type>_adisk._tcp</type>
+              <!--
+                change tm_share to share name, if you changed it.
+              -->
+              <txt-record>dk0=adVN=tm_share,adVF=0x82</txt-record>
+              <txt-record>sys=waMa=0,adVF=0x100</txt-record>
+            </service>
+          </service-group>
+        '';};
   };
 
   hardware.sane= {
@@ -195,7 +395,7 @@
   users.users.shaswat = {
     isNormalUser = true;
     description = "Shaswat";
-    extraGroups = ["networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "samba" ];
     packages = with pkgs; [
       kdePackages.kate
     ];
@@ -203,6 +403,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.ssh.forwardX11 = true;
 
   # Manage Neovim
   # programs.neovim = {
@@ -323,6 +524,8 @@
     thunderbird
     qbittorrent
     tor
+    simple-scan
+    calibre
     librewolf
     brave
     obsidian
@@ -331,6 +534,9 @@
     libreoffice
 
     # stremio
+    kdePackages.kdenlive
+    freecad
+    vlc
     josm
     openfx
 
@@ -354,6 +560,7 @@
     unzip
     unrar
     virt-viewer
+    sioyek
 
     ## TUI Games
     nethack
@@ -434,6 +641,32 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 
+      1234
+      4533
+      28981
+      8080
+      8081
+      8082
+      8096
+      5432
+      8000
+      631
+      139
+      80
+      3003
+      445
+      5432
+      2283
+      139
+      80
+      445
+      631
+      41657
+    ];
+  };
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
