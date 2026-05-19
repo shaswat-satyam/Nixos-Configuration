@@ -121,190 +121,19 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+
+  services.tailscale.enable = true;
+
+  services.udisks2 = {
+    enable = true;
+    mountOnMedia = true;
+  };
+
   services.syncthing = {
     enable = true;
     user = "shaswat";
   };
 
-  # Home Server Services 
-#   services = {
-#     homepage-dashboard = {
-#       enable = true;
-#       openFirewall = true;
-#       allowedHosts = "192.168.29.41:8082,localhost:8082,127.0.0.1:8082";
-#       widgets = [
-# 	  {
-# 	    resources = {
-# 	      cpu = true;
-# 	      disk = "/";
-# 	      memory = true;
-# 	    };
-# 	  }
-# 	  {
-# 	    search = {
-# 	      provider = "duckduckgo";
-# 	      target = "_blank";
-# 	    };
-# 	  }
-#      ];
-#     services = [
-#       {
-#         "Services Groups" = [ 
-# 	  {
-#             "IP Address" = {
-# 	      description = "http://192.169.29.41";
-# 	      href="http://192.168.29.41";
-#             };
-# 	  }
-# 	  {
-#             "Home Page" = {
-# 	      description = "This Homepage";
-# 	      href="http://192.168.29.41:8082";
-#             };
-# 	  }
-# 	  {
-#             "Jellyfin" = {
-# 	      description = "My Media Library";
-# 	      href="http://192.168.29.41:8096";
-#             };
-# 	  }
-# 	  {
-#             "Navidrome" = {
-# 	      description = "My Music Library";
-# 	      href="http://192.168.29.41:4533";
-#             };
-# 	  }
-# 	  {
-#             "Stirling PDF" = {
-# 	      description = "My PDF Convertor";
-# 	      href="http://192.168.29.41:8085";
-# 	    };
-# 	  }
-# 	  {
-#             "Paperless" = {
-# 	      description = "My Document Library";
-# 	      href="http://192.168.29.41:28981";
-# 	    };
-# 	  }
-# 	  {
-# 	    "Microbin" = {
-# 	      description = "The Paste Bin";
-# 	      href="http://192.168.29.41:8080";
-#             };
-# 	  }
-# 	  {
-#             "Vaultwarden" = {
-# 	      description = "The Password Library";
-# 	      href="http://192.168.29.41:8096";
-#             };
-# 	  }
-# 	  {
-#             "Printing" = {
-# 	      description = "The Printer Library";
-# 	      href="http://192.168.29.41:139";
-#             };
-# 	  }
-# 	  {
-#             "Immich ML" = {
-# 	      description = "The Image Mahine Learning";
-# 	      href="http://192.168.29.41:3003";
-#             };
-# 	  }
-#         ];
-#       }
-#     ];
-#   };
-# 
-#     calibre-server = {
-#       enable = true;
-#     };
-# 
-#     jellyfin = {
-#       enable = true;
-#     };
-#     stirling-pdf = {
-#       enable = true;
-#       environment = {
-#       SERVER_PORT = "8085";
-#       };
-#     };
-#     vaultwarden = {
-#       enable = true;
-#       config = {
-#         ROCKET_ADDRESS = "0.0.0.0";
-# 	ALLOW_INSECURE_HTTP = true;
-#       };
-#     };
-#     immich = {
-#       enable = true;
-#     };
-# 
-#     navidrome = {
-#       enable = true;
-#       settings = { 
-#         Address = "0.0.0.0";
-# 	MusicFolder = "/mnt/mydrive/Music";
-#       };
-#     };
-# 
-# samba = {
-#   enable = true;
-#   openFirewall = true;
-# 
-#   settings = {
-#     global = {
-#       workgroup = "WORKGROUP";
-#       "server string" = "smbnix";
-#       "netbios name" = "smbnix";
-#       security = "user";
-#       "server min protocol" = "SMB2";
-#       "server max protocol" = "SMB3";
-#     };
-# 
-#     "Laptop" = {
-#       path = "/home/shaswat/Storage";
-#       browseable = true;
-#       readOnly = false;
-#       writeable = true;
-#       guestOk = true;
-#       validUsers = [ "shaswat" ];
-#     };
-#   };};
-# 
-#     samba-wsdd = {
-#       enable = true;
-#       discovery = true;
-#     };
-# 
-#     paperless = {
-#       enable = true;
-#       address = "0.0.0.0";
-#     };
-#     microbin = {
-#       enable = true;
-#     };
-#     # miniflux = {
-#     #   enable = true;
-#     #   adminCredentialsFile = true;
-#     # };
-#   };
-#   environment.etc."nextcloud-admin-pass".text = "Lucifer_69";
-#   services.nextcloud = {
-#     enable = true;
-#     package = pkgs.nextcloud32;
-#     hostName = "localhost";
-#     config.adminpassFile = "/etc/nextcloud-admin-pass";
-#     config.dbtype = "sqlite";
-#   };
-  # Enabling Flatpak delete after Stremio stabilizes
-  # services.flatpak.enable = true;
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = ["multi-user.target"];
-  #   path = [pkgs.flatpak];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
 
   # Enable 32bit Support for Epic games
   hardware.graphics.enable32Bit = true;
@@ -561,6 +390,8 @@
     unrar
     virt-viewer
     sioyek
+    nix-search
+
 
     ## TUI Games
     nethack
@@ -569,6 +400,7 @@
     ## TUI
 
     fzf
+    ollama
     yazi
     lsd
     lazygit
@@ -643,28 +475,9 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 
-      1234
-      4533
-      28981
+    allowedTCPPorts = [
       8080
       8081
-      8082
-      8096
-      5432
-      8000
-      631
-      139
-      80
-      3003
-      445
-      5432
-      2283
-      139
-      80
-      445
-      631
-      41657
     ];
   };
   # networking.firewall.allowedUDPPorts = [ ... ];
