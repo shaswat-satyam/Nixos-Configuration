@@ -19,6 +19,7 @@
     efi.canTouchEfiVariables = true;
     limine = {
       enable = true;
+      maxGenerations = 3;
       extraEntries =''
   	/Windows
 	 protocol: efi
@@ -26,6 +27,8 @@
       '';
     };
   };
+
+
 
   # Stylix
   stylix = {
@@ -120,7 +123,9 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+  };
 
   services.tailscale.enable = true;
 
@@ -136,7 +141,12 @@
 
 
   # Enable 32bit Support for Epic games
-  hardware.graphics.enable32Bit = true;
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -196,6 +206,7 @@
     extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
+
   services.blueman.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
@@ -235,12 +246,12 @@
   programs.ssh.forwardX11 = true;
 
   # Manage Neovim
-  # programs.neovim = {
-  #   defaultEditor = true;
-  #   enable = true;
-  #   viAlias = true;
-  #   vimAlias = true;
-  # };
+  programs.neovim = {
+    defaultEditor = true;
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
   
 
 
@@ -266,13 +277,16 @@
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibilitytools.d";
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    xauth
+    vulkan-tools
+    mesa-demos
 
+    protonmail-bridge
     # Desktop Environment
     walker
     pavucontrol
@@ -286,6 +300,8 @@
     waybar
     wget
     wl-clipboard
+    pandoc
+    tesseract
     wlroots
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
@@ -363,6 +379,9 @@
     libreoffice
 
     # stremio
+    devenv
+    naps2
+    keepassxc
     kdePackages.kdenlive
     freecad
     vlc
@@ -415,6 +434,7 @@
     caligula
     gophertube
     qutebrowser
+    tmux
 
 
     # System Software
@@ -438,9 +458,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  hardware = {
-    nvidia.modesetting.enable = true;
-  };
 
   # Until Stremio Gets Secure
   # nixpkgs.config.permittedInsecurePackages = [
@@ -458,7 +475,12 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+    };
+  };
 
 
   # Auto Updates
